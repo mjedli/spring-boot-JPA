@@ -14,7 +14,7 @@ import org.springframework.lang.NonNull;
  * @author mjedli
  *
  */
-@Entity
+//@Entity
 public class ToDo {
 	
 	@Id
