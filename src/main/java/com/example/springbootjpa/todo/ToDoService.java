@@ -36,5 +36,9 @@ public class ToDoService {
 	public Optional<ToDo> findById(long id) {
 		return toDorepository.findById(id);
 	}
+	
+	Optional<ToDo> findByName(String name) {
+		return toDorepository.findByName(name);
+	}
 
 }

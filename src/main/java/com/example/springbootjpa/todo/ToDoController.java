@@ -40,8 +40,13 @@ public class ToDoController {
 		toDoService.deleteToDo(todo);
 	}
 	
-	@GetMapping(value="/{id}")
+	@GetMapping(value="/id/{id}")
 	private Optional<ToDo> findById(@PathVariable long id) {
 		return toDoService.findById(id);
+	}
+	
+	@GetMapping(value="/name/{name}")
+	private Optional<ToDo> findByName(@PathVariable String name) {
+		return toDoService.findByName(name);
 	}
 }
