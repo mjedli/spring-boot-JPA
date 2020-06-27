@@ -5,7 +5,10 @@ package com.example.springbootjpa.todo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,24 +21,27 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ToDoController {
-	
-	public static List<ToDo> data = new ArrayList<ToDo>();
+
+	@Autowired
+	ToDoService toDoService;
 	
 	@GetMapping(value= {"/", ""})
 	private List<ToDo> getAllTodo() {
-		ToDo todo = new ToDo();
-		todo.setId(0);
-		todo.setName("name");
-		todo.setDescription("description");
-		data.add(todo);
-		return data;
+		return toDoService.getAllToDo();
 	}
-
 	
 	@PostMapping(value= {"/", ""})
 	private ToDo saveToDo(@RequestBody ToDo todo) {
-		data.add(todo);
-		return todo;
+		return toDoService.saveToDo(todo);
 	}
 	
+	@DeleteMapping(value= {"/", ""})
+	private void deleteToDo(@RequestBody ToDo todo) {
+		toDoService.deleteToDo(todo);
+	}
+	
+	@GetMapping(value="/{id}")
+	private Optional<ToDo> findById(@PathVariable long id) {
+		return toDoService.findById(id);
+	}
 }
